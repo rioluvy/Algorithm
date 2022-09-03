@@ -13,3 +13,7 @@ if wrong_numAA>wrong_numBB:
   print(wrong_numAA)
 else:
   print(wrong_numBB)
+  
+# 파이썬을 사용하면 모듈 사용에 익숙해지자  
+# A, B = input().split()
+# print(max(int(A[::-1]), int(B[::-1])))
