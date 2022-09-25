@@ -1,3 +1,4 @@
+
 K = int(input())
 total_list = [0]
 for _ in range(K):
