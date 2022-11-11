@@ -1,0 +1,5 @@
+d, h, w = map(int,input().split())
+a = int((d*h)/((h**2)+(w**2))**(1/2))
+b = int((d*w)/((h**2)+(w**2))**(1/2))
+print(a, end =" ")
+print(b)
