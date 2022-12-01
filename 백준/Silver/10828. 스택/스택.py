@@ -1,28 +1,26 @@
-from collections import deque
 import sys
+from collections import deque
+
 N = int(sys.stdin.readline())
-dq = deque([])
-for _ in range(N):
-  a = sys.stdin.readline().rstrip().split()
-  if a[0] == 'push':
-    dq.append(a[1])
-  if a[0] == 'pop':
-    if dq != deque([]):
-      b = dq.pop()
-      print(b)
-    else:
-      print(-1)
-  if a[0] == 'size':
-    print(len(dq))
-  if a[0] == 'empty':
-    if dq == deque([]):
-      print(1)
-    else:
-      print(0)
-  if a[0] == 'top':
-    if dq == deque([]):
-      print(-1)
-    else:
-      c = dq.pop()
-      dq.append(c)
-      print(c)
+stack = deque()
+for i in range(N):
+    command = sys.stdin.readline().split()
+    if command[0] == 'push':
+        stack.append(command[1])
+    elif command[0] == 'top':
+        if len(stack) != 0:
+            print(stack[len(stack) - 1])
+        else:
+            print(-1)
+    elif command[0] == 'size':
+        print(len(stack))
+    elif command[0] == 'empty':
+        if len(stack) == 0:
+            print(1)
+        else:
+            print(0)
+    elif command[0] == 'pop':
+        if len(stack) != 0:
+            print(stack.pop())
+        else:
+            print(-1)
