@@ -16,21 +16,16 @@ def Sol():
         heapq.heappush(max_heap,(-num,i))
       else:
         if num == -1:
-          while min_heap and check[min_heap[0][1]] == 0:
-            heapq.heappop(min_heap)
           if min_heap:
             check[heapq.heappop(min_heap)[1]] = 0
         elif num == 1:
-          while max_heap and check[max_heap[0][1]] == 0:
-            heapq.heappop(max_heap)
           if max_heap:
             check[heapq.heappop(max_heap)[1]] = 0
-
-    while min_heap and check[min_heap[0][1]] == 0:
-      heapq.heappop(min_heap)
-    while max_heap and check[max_heap[0][1]] == 0:
-      heapq.heappop(max_heap)
-
+      while min_heap and check[min_heap[0][1]] == 0:
+        heapq.heappop(min_heap)
+      while max_heap and check[max_heap[0][1]] == 0:
+        heapq.heappop(max_heap)
+    
     if min_heap == []:
       print("EMPTY")
     else:
