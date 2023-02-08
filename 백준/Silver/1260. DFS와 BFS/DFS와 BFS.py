@@ -1,47 +1,46 @@
-import sys
-from collections import deque
-input = sys.stdin.readline
-sys.setrecursionlimit(10000)
 N,M,V = map(int,input().split())
-link = [[] for _ in range(N+1)]
-queue = deque([])
 
-def Sol():
+net = dict()
+for _ in range(M):
+  s, e = map(int,input().split())
+  if not net.get(s) or not net.get(e):
+    net.setdefault(s, set())
+    net.setdefault(e, set())
+  net[s].add(e)
+  net[e].add(s)
+  
+is_travel_dfs = [False for _ in range(N+1)]
+is_travel_bfs = [False for _ in range(N+1)]
 
-  ## 그래프 리스트 생성
-  for _ in range(M):
-    a, b = map(int,input().split())
-    link[a].append(b)
-    link[b].append(a)
 
-  for i in range(len(link)):
-    link[i].sort()
+def dfs(n):
+  if is_travel_dfs[n]:
+    return 
+  is_travel_dfs[n] = True
+  print(n,end =' ')
+  
+  if net.get(n):
+    connect = sorted(list(net[n]))
+    for item in connect:
+      dfs(item)
 
-  visited = [False] * (N+1)
-  ## DFS
-  def DFS(v):
-    print(v, end = " ")
-    visited[v] = True
-    for e in link[v]:
-      if not visited[e]:
-        DFS(e)
+queue = list()
+def bfs(n):
+  queue.append(n)
+  is_travel_bfs[n] = True
+  
+  while queue:
+    temp = queue.pop(0)
+    print(temp, end = " ")
+    if net.get(temp):
+      connect = sorted(list(net[temp]))
+      for item in connect:
+        if is_travel_bfs[item]:
+          continue
+        is_travel_bfs[item] = True
+        queue.append(item)
+    
 
-  ## BFS
-  def BFS(v):
-    queue.append(v)
-    visited[v] = True
-    while queue:
-      temp = queue.popleft()
-      print(temp, end = " ")
-      for i in link[temp]:
-        if not visited[i]:
-          queue.append(i)
-          visited[i] = True
-
-  DFS(V)
-  print()
-  visited = [False] * (N+1)
-  BFS(V)
-
-if __name__ == "__main__":
-  Sol()
+dfs(V)
+print()
+bfs(V)
