@@ -16,7 +16,7 @@ end = 0
 p_idx = 0
 cnt  = 0
 
-while end != M:
+while end < M and start <= M - len(P):
   if S[end] == P[p_idx]:
     end += 1
     p_idx += 1
@@ -29,6 +29,9 @@ while end != M:
   if p_idx == 2*N+1:
     cnt += 1
     p_idx = 0
+    if end == M-1:
+      print(cnt)
+      sys.exit()
     start += 2
     end = start
 print(cnt)
