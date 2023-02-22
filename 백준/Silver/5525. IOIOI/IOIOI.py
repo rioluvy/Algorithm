@@ -1,37 +1,26 @@
 import sys
 input = sys.stdin.readline
-N = int(input())
-M = int(input())
-S = list(input().rstrip())
+def Sol():
 
-P = []
-for i in range(2*N+1):
-  if i % 2 == 0:
-    P.append('I')
-  else:
-    P.append('O')
+  N = int(input())
+  M = int(input())
+  S = list(input().rstrip())
 
-start = 0
-end = 0
-p_idx = 0
-cnt  = 0
+  IOI = 0
+  idx = 0
+  cnt  = 0
 
-while end < M and start <= M - len(P):
-  if S[end] == P[p_idx]:
-    end += 1
-    p_idx += 1
-  else:
-    if S[end] == 'O':
-      end += 1
-    start = end
-    p_idx = 0
-  
-  if p_idx == 2*N+1:
-    cnt += 1
-    p_idx = 0
-    if end == M-1:
-      print(cnt)
-      sys.exit()
-    start += 2
-    end = start
-print(cnt)
+  while idx < M - 2:
+    if S[idx] == 'I' and S[idx+1] == 'O' and S[idx+2] == 'I':
+      IOI += 1
+      if IOI == N:
+        cnt += 1
+        IOI -= 1
+      idx += 1
+    else:
+      IOI = 0
+    idx += 1
+  print(cnt)
+
+if __name__ == "__main__":
+  Sol()
