@@ -42,7 +42,7 @@ int main() {
             d = (d+ruleA[r][c])%4;
             save_cnt = cnt;
         }else{
-            if(cache[r][c][d] == 4000){
+            if(cache[r][c][d] == 3750){
                 break;
             }
             cache[r][c][d]++;
