@@ -8,17 +8,31 @@
 using namespace std;
 
 bool dust[65][65];
-int cache[65][65][4];
+bool cache[65][65][4];
+int ruleA[65][65];
+int ruleB[65][65];
+int dx[4] = {-1,0,1,0};
+int dy[4] = {0,1,0,-1};
+int H,W,r,c,d;
+
+int clearCache(){
+	for(int i = 0; i < H; i++){
+		for(int j = 0; j < W; j++){
+			for(int k = 0; k < 4; k++){
+				cache[i][j][k] = false;
+			}
+		}
+	}
+	return 0;
+}
 
 int main() {
 	ios_base::sync_with_stdio(false);
 	cin.tie(NULL);cout.tie(NULL);
-	
-	int H,W,r,c,d;
+
 	string s;
 	cin >> H >> W >> r >> c >> d;
-	int ruleA[65][65];
-	int ruleB[65][65];
+
 
 	for(int i = 0; i < H; i++){
 		cin >> s;
@@ -33,24 +47,23 @@ int main() {
 		}
 	}
 
-    int dx[4] = {-1,0,1,0};
-    int dy[4] = {0,1,0,-1};
-    int save_cnt = 0, cnt = 0;
-	while(r >= 0 && r < H && c >= 0 && c < W){
-        if(!dust[r][c]){
-            dust[r][c] = true;
-            d = (d+ruleA[r][c])%4;
-            save_cnt = cnt;
-        }else{
-            if(cache[r][c][d] == 3600){
-                break;
-            }
-            cache[r][c][d]++;
-            d = (d+ruleB[r][c])%4;
-        }
-        r = r+dx[d];
-        c = c+dy[d];
-        cnt++;
-    }
-    cout << save_cnt+1;
+	int cnt = 0, ans = 0;
+	while(true){
+		if(r<0 || r>=H || c<0 || c>=W) break;
+		if(cache[r][c][d]) break;
+
+		if(dust[r][c]) {
+			cache[r][c][d] = true;
+			d = (d+ruleB[r][c])%4;
+		}
+		else {
+			clearCache();
+			dust[r][c] = true;
+			d = (d+ruleA[r][c])%4;
+			ans = cnt;
+		}
+		r += dx[d], c += dy[d];
+		cnt++;
+	}
+	cout << ans+1;
 }
