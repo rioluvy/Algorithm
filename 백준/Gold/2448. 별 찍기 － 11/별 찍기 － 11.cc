@@ -2,14 +2,14 @@
 #include <string>
 using namespace std;
 
-char star[3072][6144];
+bool star[3072][6144];
 
 void drawStar(int i, int j, int step){
   if(step == 3){
-    star[i][j] = '*';
-    star[i+1][j-1] = star[i+1][j+1] = '*';
+    star[i][j] = true;
+    star[i+1][j-1] = star[i+1][j+1] = true;
     for(int k = 0; k < 5; k++){
-      star[i+2][j-2+k] = '*';
+      star[i+2][j-2+k] = true;
     }
     return;
   }
@@ -25,17 +25,11 @@ int main(){
   cin >> n;
   h = n, w = h*2-1;
 
-  for(int i = 0; i < n; i++){
-    for(int j = 0; j < w; j++){
-      star[i][j] = ' ';
-    }
-  }
-
   drawStar(0,w/2,h);
 
   for(int i = 0; i < h; i++){
     for(int j = 0; j < w; j++){
-      cout << star[i][j];
+      cout << (star[i][j] ? '*':' ');
     }
     cout << '\n';
   }
