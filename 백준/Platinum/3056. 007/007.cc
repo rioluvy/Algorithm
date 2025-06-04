@@ -6,7 +6,7 @@ int n;
 double p[20][20], dp[1<<20];
 
 double trial(int cur, int visited){
-  if(cur == n){
+  if(visited == (1<<n)-1){
     return 1.0;
   }
   double &ret = dp[visited];
