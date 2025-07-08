@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#define endl "\n"
 using namespace std;
 
 int t, n;
@@ -19,7 +18,7 @@ int main() {
 			if(A[i] != A[i+1]) flag=1;
 		}
 		if(!flag){
-			cout << "NO" << endl;
+			cout << "NO\n";
 			continue;
 		}
 		vector<int> ans(n,0);
@@ -27,7 +26,7 @@ int main() {
 		int one = -1;
 		for(int i = 0; i < n; i++){
 			ans[i] = i+1;
-			if(ans[i] == A[i]) tmp.push_back(i); //push index
+			if(ans[i] == A[i]) tmp.push_back(i);
 		}
 		if(tmp.size()==1) {
 			for(int i = 0; i < n; i++){
@@ -40,8 +39,8 @@ int main() {
 				swap(ans[tmp[i]],ans[tmp[i+1]]);
 			}
 		}
-		cout << "YES" << endl;
+		cout << "YES\n";
 		for(auto v:ans) cout << v << " ";
-		cout << endl;
+		cout << "\n";
 	}
 }
