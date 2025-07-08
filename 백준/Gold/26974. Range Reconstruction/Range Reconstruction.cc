@@ -1,9 +1,9 @@
 #include <iostream>
 #include <algorithm>
-#define lint long long
+#define ll long long
 using namespace std;
 
-lint arr[301][301], ans[301], a, b, tmp, ab;
+ll arr[301][301], ans[301], a, b, tmp, ab;
 int n;
 
 int main() {
