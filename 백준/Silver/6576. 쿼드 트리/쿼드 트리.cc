@@ -7,7 +7,6 @@ vector<vector<char>> arr;
 string s;
 
 void decompress(string::iterator& it, int x, int y, int size){
-  if(it == s.end()) return;
   char head = *(it++);
   if(head == 'W' || head == 'B'){
     for(int i = 0; i < size; i++){
