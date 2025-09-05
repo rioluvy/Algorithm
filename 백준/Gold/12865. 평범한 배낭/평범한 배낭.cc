@@ -1,19 +1,26 @@
-#include <iostream>
+#include<iostream>
+#include<vector>
 using namespace std;
-int main(){
-    int n, k;
-    cin >> n >> k;
-    int weight[102];
-    int value[102];
-    int *dp = new int[k+2];
-    for(int i = 1; i < n+1; i++){
-        cin >> weight[i] >> value[i];
-    }
 
-    for(int i = 1 ; i < n+1; i++){
-        for(int j = k; j >= weight[i]; j--){
-            dp[j] = max(dp[j],dp[j-weight[i]]+value[i]);
-        }
+struct tmp{
+  int w,v;
+};
+
+int main(){
+  ios_base::sync_with_stdio(0);
+  cin.tie(0);
+  int n, k;
+  cin >> n >> k;
+  vector<tmp> info(n);
+  for(int i = 0; i < n; i++){
+    cin >> info[i].w >> info[i].v;
+  }
+
+  vector<int> cache(k+1,0);
+  for(int i = 0; i < n; i++){
+    for(int j = k; j >= info[i].w; j--){
+      cache[j] = max(cache[j],cache[j-info[i].w]+info[i].v);
     }
-    cout << dp[k];
+  }
+  cout << cache[k];
 }
