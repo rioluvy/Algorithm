@@ -2,8 +2,8 @@
 #include<cstring>
 using namespace std;
 
-int n, mm, cache[10001];
-double m, tmpP;
+int n, cache[10001];
+double m, tmp;
 
 struct candy{
   int cal, price;
@@ -13,16 +13,15 @@ int main(){
   while(cin >> n >> m){
     if(n == 0 && m == 0) break;
     memset(cache,0,sizeof(cache));
-    mm = int(m*100+0.5);
+    int mm = (int)(m*100+0.5);
     candy arr[5001];
-    for(int i = 0; i < n; i++){
-      cin >> arr[i].cal >> tmpP;
-      arr[i].price = (int)(tmpP*100+0.5);
+    for(int i = 1; i <= n; i++){
+      cin >> arr[i].cal >> tmp;
+      arr[i].price = (int)(tmp*100+0.5);
     }
-
-    for(int i = 0; i < n; i++){
+    for(int i = 1; i <= n; i++){
       for(int j = arr[i].price; j <= mm; j++){
-        cache[j] = max(cache[j],cache[j-arr[i].price] + arr[i].cal);
+        cache[j] = max(cache[j],cache[j-arr[i].price]+arr[i].cal);
       }
     }
     cout << cache[mm] << "\n";
