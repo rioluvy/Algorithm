@@ -26,15 +26,12 @@ int main(){
 
   for(int i = 2; i <= 40000; i++){
     if(p[i] == 0) continue;
+    coin.push_back(i);
     for(int j = i*i; j <= 40000; j += i){
       p[j] = 0;
     }
   }
-
-  for(int i = 2; i <= 40000; i++){
-    if(p[i]!=0) coin.push_back(i);
-  }
-
+  
   cache[0] = 1;
   for(int i = 0; i < coin.size(); i++){
     for(int j = coin[i]; j <= n; j++){
