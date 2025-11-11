@@ -12,7 +12,7 @@
 #define mod 123456789
 using namespace std;
 
-int n, p[40001], cache[40001];
+int n, prime[40001], cache[40001];
 vector<int> coin;
 
 int main(){
@@ -20,18 +20,17 @@ int main(){
   cin.tie(0);cout.tie(0);
 
   cin >> n;
-  for(int i = 2; i <= 40000; i++){
-    p[i] = i;
-  }
-
-  for(int i = 2; i <= 40000; i++){
-    if(p[i] == 0) continue;
-    coin.push_back(i);
-    for(int j = i*i; j <= 40000; j += i){
-      p[j] = 0;
+  for(int i = 2; i < 40001; i++) prime[i] = i;
+  for(int i = 2; i < 40001; i++){
+    if(prime[i] == 0) continue;
+    for(int j = i*i; j < 40001; j += i){
+      prime[j] = 0;
     }
   }
-  
+  for(int i = 0; i < 40001; i++){
+    if(prime[i] != 0) coin.push_back(i);
+  }
+
   cache[0] = 1;
   for(int i = 0; i < coin.size(); i++){
     for(int j = coin[i]; j <= n; j++){
