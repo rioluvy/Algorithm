@@ -1,40 +1,30 @@
-#include <iostream>
-#include <algorithm>
-#include <vector>
-#include <cmath>
+#include <bits/stdc++.h>
+#define ll long long
+#define pii pair<int,int>
 using namespace std;
 
-int main() {
-	ios_base::sync_with_stdio(false);
-	cin.tie(0);cout.tie(0);
-	int n, q;
-	cin >> n;
-	vector<int> A(n);
-	for(int i = 0; i < n; i++){
-		cin >> A[i];
-	}
-	cin >> q;
-	vector<int> L(q);
-	for(int i = 0; i < q; i++){
-		cin >> L[i];
-	}
-	int mx = *max_element(L.begin(),L.end());
-	vector<int> dp(mx+1);
-	for(int i = 0; i < n; i++){
-		if(A[i] <= mx) dp[A[i]]++;
-	}
+int n, a[100001], q, tmp;
 
-	for(int i = 2; i < mx+1; i++){
-		for(int j = 1; j * j <= i; j++){
-			if(i%j == 0){
-				dp[i] += dp[j];
-				if(j != 1 && j * j != i){
-					dp[i] += dp[i/j];
-				}
-			}
-		}
-	}
-	for(int i = 0; i < q; i++){
-		cout << dp[L[i]] << " ";
-	}
+int main(){
+  ios_base::sync_with_stdio(0);
+  cin.tie(0);cout.tie(0);
+
+  cin >> n;
+  for(int i = 1; i <= n; i++) {
+    cin >> tmp;
+    a[tmp]++;
+  }
+
+  for(int i = 1; i <= 100000; i++){
+    if(a[i] == 0) continue;
+    for(int j = i*2; j <= 100000; j+=i){
+      a[j] += a[i];
+    }
+  }
+
+  cin >> q;
+  while(q--){
+    cin >> tmp;
+    cout << a[tmp] << " ";
+  }
 }
