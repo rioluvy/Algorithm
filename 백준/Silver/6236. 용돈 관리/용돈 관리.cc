@@ -13,9 +13,8 @@ int main(){
         cin >> arr[i];
     }
 
-    int l,h,mid;
+    int l,h,mid,ans;
     l = *max_element(arr,arr+n); h = 1000000000;
-    int ans = h;
     while(l <= h){
         mid = (l+h)/2;
         int cnt = 0;
