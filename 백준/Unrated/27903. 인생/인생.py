@@ -1,0 +1,1 @@
+print(chr(115)+chr(119)+chr(121)+chr(106)+chr(115))
